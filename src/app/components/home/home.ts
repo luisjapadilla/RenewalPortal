@@ -52,10 +52,11 @@ export class HomeComponent {
 
   emailMe() {
     const email = this.form.value.email;
-
-    if (email) {
+    const phoneForm = this.form.value.phone;
+    const apiKey = this.form.value.apiKey;
+    if (email && phoneForm && apiKey) {
       this.loading.set(true);
-      this.emailService.sendEmail(email).subscribe({
+      this.emailService.sendEmail(email, phoneForm, apiKey).subscribe({
         next: (res) => {
           console.log('Email Sent', res);
           this.message.set(`✉️ Email sent to: ${email}`);
